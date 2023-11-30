@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   epur_str.c                                         :+:      :+:    :+:   */
+/*   rotone.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 23:52:16 by dmeirele          #+#    #+#             */
-/*   Updated: 2023/11/27 00:09:54 by dmeirele         ###   ########.fr       */
+/*   Created: 2023/11/26 23:21:50 by dmeirele          #+#    #+#             */
+/*   Updated: 2023/11/26 23:35:38 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,19 @@
 int main(int argc, char *argv[])
 {
 	int j = 0;
-	int flag = 0;
 
 	if(argc == 2)
 	{
-		while(argv[1][j] == ' ' || argv[1][j] == '\t')
-			j++;
 		while(argv[1][j])
 		{
-			if(argv[1][j] == ' ' || argv[1][j] == '\t')
-				flag = 1;
-			while(argv[1][j] == ' ' || argv[1][j] == '\t')
-				j++;
-			while(argv[1][j] != ' ' && argv[1][j] != '\t' && argv[1][j] != '\0')
-			{
-				if(flag)
-				{
-					write(1, " ", 1);
-					flag = 0;
-				}
-				write(1, &argv[1][j], 1);
-				j++;
-			}
+			if((argv[1][j] >= 'a' && argv[1][j] <= 'y') || (argv[1][j] >= 'A' && argv[1][j] <= 'Y'))
+				argv[1][j] = argv[1][j] + 1;
+			else if(argv[1][j] == 'z')
+				argv[1][j] = 'a';
+			else if(argv[1][j] == 'Z')
+				argv[1][j] = 'A';
+			write(1, &argv[1][j], 1);
+			j++;
 		}
 	}
 	write(1, "\n", 1);

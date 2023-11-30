@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_op.c                                            :+:      :+:    :+:   */
+/*   fizzbuzz.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 20:00:59 by dmeirele          #+#    #+#             */
-/*   Updated: 2023/11/26 20:08:02 by dmeirele         ###   ########.fr       */
+/*   Created: 2023/11/27 11:23:05 by dmeirele          #+#    #+#             */
+/*   Updated: 2023/11/27 11:36:08 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include<unistd.h>
 
-void do_op(int n1, char op, int n2)
+void ft_putnumber(int number)
 {
-	if(op == '+')
-		printf("%d",n1 + n2);
-	else if(op == '-')
-		printf("%d",n1 - n2);
-	else if(op == '*')
-		printf("%d",n1*n2);
-	else if(op == '/')
-		printf("%d",n1/n2);
-	else if(op == '%')
-		printf("%d",n1%n2);
+	char str[10] = "0123456789";
+
+	if(number > 9)
+		ft_putnumber(number/10);
+	write(1, &str[number % 10], 1);
 }
 
 int main(int argc, char *argv[])
 {
-	if(argc == 4)
-		do_op(atoi(argv[1]),argv[2][0],atoi(argv[3]));
-	printf("\n");
+	int i = 1;
+	if(argc == 1 && argv)
+	{
+		while(i <= 100)
+		{
+			if(i%3 == 0 && i%5 == 0)
+				write(1, "fizzbuzz", 8);
+			else if(i%3 == 0)
+				write(1, "fizz", 4);
+			else if(i%5 == 0)
+				write(1, "buzz", 4);
+			 else
+				ft_putnumber(i);
+			write(1, "\n", 1);
+			i++;
+		}
+	}
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 21:36:39 by dmeirele          #+#    #+#             */
-/*   Updated: 2023/11/23 21:38:46 by dmeirele         ###   ########.fr       */
+/*   Created: 2023/11/23 21:47:30 by dmeirele          #+#    #+#             */
+/*   Updated: 2023/11/23 21:52:11 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<unistd.h>
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *data;
+}                t_list;
 
-void ft_putstr(char *str)
+int	ft_list_size(t_list *begin_list)
 {
 	int i = 0;
-	while(str[i])
+	while(begin_list)
 	{
-		write(1, &str[i], 1);
 		i++;
+		begin_list = begin_list->next;
 	}
+	return i;
 }

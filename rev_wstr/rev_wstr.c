@@ -1,43 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   epur_str.c                                         :+:      :+:    :+:   */
+/*   rev_wstr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 23:52:16 by dmeirele          #+#    #+#             */
-/*   Updated: 2023/11/27 00:09:54 by dmeirele         ###   ########.fr       */
+/*   Created: 2023/11/28 07:46:14 by dmeirele          #+#    #+#             */
+/*   Updated: 2023/11/28 08:10:17 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<unistd.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[])
 {
 	int j = 0;
 	int flag = 0;
+	int start;
+	int end;
 
-	if(argc == 2)
+	if (argc == 2)
 	{
-		while(argv[1][j] == ' ' || argv[1][j] == '\t')
+		while (argv[1][j])
 			j++;
-		while(argv[1][j])
+
+		while (j > 0)
 		{
-			if(argv[1][j] == ' ' || argv[1][j] == '\t')
-				flag = 1;
-			while(argv[1][j] == ' ' || argv[1][j] == '\t')
-				j++;
-			while(argv[1][j] != ' ' && argv[1][j] != '\t' && argv[1][j] != '\0')
+			while ((j > 0) && (argv[1][j - 1] == ' ' || argv[1][j - 1] == '\t'))
 			{
-				if(flag)
-				{
-					write(1, " ", 1);
-					flag = 0;
-				}
-				write(1, &argv[1][j], 1);
-				j++;
+				j--;
+				flag = 1;
+			}
+			end = j;
+			if (flag)
+				write(1, " ", 1);
+			while ((j > 0) && (argv[1][j - 1] != ' ' && argv[1][j - 1] != '\t'))
+				j--;
+
+			start = j;
+
+			while (start < end)
+			{
+				flag = 0;
+				write(1, &argv[1][start], 1);
+				start++;
 			}
 		}
 	}
+
 	write(1, "\n", 1);
 }

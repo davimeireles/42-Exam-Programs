@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   epur_str.c                                         :+:      :+:    :+:   */
+/*   last_word.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 23:52:16 by dmeirele          #+#    #+#             */
-/*   Updated: 2023/11/27 00:09:54 by dmeirele         ###   ########.fr       */
+/*   Created: 2023/11/27 11:36:40 by dmeirele          #+#    #+#             */
+/*   Updated: 2023/11/27 12:06:24 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,26 @@
 
 int main(int argc, char *argv[])
 {
-	int j = 0;
-	int flag = 0;
-
+	int i = 0;
+	int start;
+	int end;
 	if(argc == 2)
 	{
-		while(argv[1][j] == ' ' || argv[1][j] == '\t')
-			j++;
-		while(argv[1][j])
-		{
-			if(argv[1][j] == ' ' || argv[1][j] == '\t')
-				flag = 1;
-			while(argv[1][j] == ' ' || argv[1][j] == '\t')
-				j++;
-			while(argv[1][j] != ' ' && argv[1][j] != '\t' && argv[1][j] != '\0')
+			while(argv[1][i])
+				i++;
+			while(argv[1][i] == ' ' || argv[1][i] == '\t' || argv[1][i] == '\0')
+				i--;
+			end = i;
+			while(argv[1][i] != ' ' && argv[1][i] != '\t' && i > 0)
+				i--;
+			start = i;
+			if(argv[1][start] == ' ' || argv[1][start] == '\t')
+				start++;
+			while(start <= end)
 			{
-				if(flag)
-				{
-					write(1, " ", 1);
-					flag = 0;
-				}
-				write(1, &argv[1][j], 1);
-				j++;
+				 write(1, &argv[1][start], 1);
+				 start++;
 			}
-		}
 	}
 	write(1, "\n", 1);
 }
